@@ -1,0 +1,92 @@
+.sensor-display-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    color: #ffffff; /* Changed from #e0e0e0 */
+}
+
+.status-indicators { /* New container for multiple status lines */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align text to the left */
+    margin-bottom: 20px;
+}
+
+.status-indicator {
+    font-size: 1.1em;
+    margin-bottom: 5px; /* Spacing between status lines */
+}
+
+.status-indicator .connected {
+    color: #4CAF50; /* Green */
+    font-weight: bold;
+}
+
+.status-indicator .disconnected {
+    color: #F44336; /* Red */
+    font-weight: bold;
+}
+
+.status-indicator .re-connecting {
+    color: #FF9800; /* Orange */
+    font-weight: bold;
+}
+
+.status-indicator .not-applicable { /* Style for N/A USB status */
+    color: #9E9E9E; /* Grey */
+    font-weight: bold;
+}
+
+.bars-container {
+    display: flex;
+    justify-content: flex-start; /* Changed from space-around */
+    align-items: flex-end; /* Align bars to the bottom */
+    height: 480px; /* Increased height by 20% (from 400px) */
+    border: 1px solid #444; /* Darker border for dark theme */
+    padding: 10px;
+    background-color: #222222; /* Changed from #f9f9f9 */
+    gap: 10px; /* Added for fixed spacing */
+}
+
+.bar-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 0; /* Removed horizontal margins (was 0 2.5px) */
+}
+
+.bar-value {
+    font-size: 0.8em;
+    color: #ffffff; /* Changed from #333 */
+    margin-bottom: 2px;
+    height: 1.2em; /* Ensure space for value even if 0 */
+}
+
+.bar {
+    width: 30px; /* Width of each bar */
+    height: 360px; /* Increased height by 20% (from 300px) */
+    background-color: #e0e0e0;
+    border: 1px solid #bdbdbd;
+    display: flex;
+    flex-direction: column-reverse; /* Fill from bottom */
+    position: relative;
+    overflow: hidden; /* Ensures fill doesn't exceed bar boundaries */
+}
+
+.bar-fill {
+    width: 100%;
+    background-color: #4CAF50; /* Default fill color, will be overridden by inline style */
+    transition: height 0.2s ease-out, background-color 0.2s ease-out; /* Smooth transition for height changes */
+}
+
+.bar-label {
+    margin-top: 5px;
+    font-size: 0.9em;
+    color: #ffffff; /* Changed from #555 */
+} 
