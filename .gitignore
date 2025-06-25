@@ -1,0 +1,21 @@
+# IDE and OS files
+.vscode/
+.idea/
+.DS_Store
+*.log
+
+# PlatformIO
+16_Channel_IR_Readings_test/.pio/
+16_Channel_IR_Readings_test/lib/
+
+# Node.js
+node_modules/
+SensorVisualizer/sensor-backend/node_modules/
+SensorVisualizer/sensor-backend/dist/
+SensorVisualizer/sensor-visualizer-app/node_modules/
+SensorVisualizer/sensor-visualizer-app/build/
+
+# NPM
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
