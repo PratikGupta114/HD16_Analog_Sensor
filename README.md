@@ -1,4 +1,4 @@
-# HD16 Analog Sensor Visualizer
+# HD16 Analog Sensor Guide <img src="https://img.shields.io/badge/lastest_sensor_version-1.0-green">
 
 This project provides a complete system for reading data from a 16-channel analog sensor using a compatible microcontroller (like ESP32, Arduino, STM32, etc.), sending the data to a Node.js backend, and visualizing it in real-time with a React-based web application.
 
