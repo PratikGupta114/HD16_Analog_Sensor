@@ -75,7 +75,7 @@ The repository is organized into three main components:
 ### 1. Hardware Setup
 
 > **💡 Important Note for Best Results:**
-> *   **Optimal Sensing Distance (Hf)**: For the most accurate readings, maintain a constant height of **2.5 mm** between the TCRT5000 sensor and the surface. The optimal sensing range is between **1 mm and 5 mm**.
+> *   **Optimal Sensing Distance (Hf)**: For the most accurate readings, maintain a constant height of **2 mm** between the TCRT5000 sensor and the surface. The optimal sensing range is between **1 mm and 5 mm**.
 > *   **Reliable Connections**: Ensure firm, stable connections between the sensors and the microcontroller. Fragile jumper wires can cause noise and unreliable readings. Soldered connections are recommended for permanent setups.
 
 ```
@@ -250,6 +250,16 @@ This will automatically open a new tab in your default web browser at `http://lo
 1.  Ensure the Microcontroller is programmed and connected to your computer.
 2.  Run the backend server to establish a serial connection and start the WebSocket.
 3.  Run the frontend application to view the data visualization.
+
+## Datasheets and Resources
+
+Here are some helpful resources for the components used in this project:
+
+*   **TCRT5000/TCRT5000L Datasheet (Vishay)**: [Official Datasheet](https://www.vishay.com/docs/83760/tcrt5000.pdf)
+*   **CD4067BE Datasheet (Texas Instruments)**: [Official Datasheet](https://www.alldatasheet.com/datasheet-pdf/pdf/157680/TI/CD4067BE.html)
+*   **Interfacing CD74HC4067 with Arduino (ElectroPeak)**: [Tutorial](https://electropeak.com/learn/interfacing-cd74hc4067-16-channel-analog-digital-multiplexer-with-arduino/)
+*   **Arduino Interfacing with CD74HC4067 (Instructables)**: [Tutorial](https://www.instructables.com/Arduino-Interfacing-With-CD74HC4067-16-channel-MUX/)
+*   **CD74HC4067 Arduino Library and Code Examples (DeepBlue Embedded)**: [Tutorial](https://deepbluembedded.com/arduino-cd74hc4067-analog-multiplexer-library-code/)
 
 ## Contributing
 
