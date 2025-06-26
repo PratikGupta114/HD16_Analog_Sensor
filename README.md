@@ -27,6 +27,10 @@ This project provides a complete system for reading data from a 16-channel analo
 | STM8 Series | 3.3V/5V | 10-bit | Cost-effective 8-bit MCUs **(Recommended)** |
 | ESP32-S2/S3 | 3.3V | 12-bit | Improved ESP32 variants |
 
+> **⚠️ Voltage Compatibility Warning:**
+> *   **When powering sensors with 3.3V:** The setup is safe for both 3.3V and 5V microcontrollers, as the sensor's output signal will be within the safe limits for both.
+> *   **When powering sensors with 5V:** The sensor's output will be approximately 5V. **Do not connect this directly to a 3.3V microcontroller's input pin** unless it is confirmed to be 5V tolerant. Doing so can permanently damage the microcontroller. Use a logic level shifter to safely interface 5V sensor outputs with 3.3V microcontrollers.
+
 ### ADC Configuration and Best Practices
 
 For the most accurate and stable analog readings, consider the following recommendations:
@@ -89,7 +93,21 @@ The repository is organized into three main components:
                         +----------------+
 ```
 
-### 2. Basic Code Example (Arduino)
+### 2. Firmware: Auto-Calibration and Data Normalization
+
+Before reading sensor values, the firmware performs a one-time auto-calibration routine. This is a crucial step to ensure data accuracy and consistency.
+
+**How it Works:**
+1.  **Data Collection:** On startup, the microcontroller takes **700** samples from each of the 16 sensors to establish a baseline.
+2.  **Finding Extremes:** During this phase, it records the minimum (darkest) and maximum (lightest) reading for each individual sensor.
+3.  **Min-Max Scaling:** After calibration, every new sensor reading is normalized using a technique called Min-Max Scaling. The raw value is mapped from its unique calibrated range `[min, max]` to a standardized range of `0-1023`.
+
+**Why is this important?**
+*   **Compensates for Sensor Variations:** No two TCRT5000 sensors are exactly alike. Calibration accounts for minor manufacturing differences.
+*   **Adapts to Ambient Conditions:** It helps neutralize the effect of background lighting, leading to more reliable readings.
+*   **Provides Consistent Output:** By scaling the output, the system ensures that a `0` truly represents the minimum reflection and `1023` represents the maximum, regardless of the raw values.
+
+### 3. Basic Code Example (Arduino)
 
 ```cpp
 #include <Arduino.h>
@@ -244,6 +262,30 @@ cd HD16_Analog_Sensor
     ```
 
 This will automatically open a new tab in your default web browser at `http://localhost:3000`. The application will connect to the backend WebSocket and begin displaying sensor data.
+
+## Troubleshooting Common Setup Issues
+
+If you encounter problems, here are some common issues and their solutions:
+
+#### Backend (`sensor-backend`)
+
+*   **Error: `Cannot find serial port` or `Permission denied`**
+    *   **Solution 1:** Ensure your microcontroller is plugged into the computer.
+    *   **Solution 2 (Linux):** You may need to grant your user permission to access serial ports. Run `sudo usermod -a -G dialout $USER`, then log out and log back in.
+    *   **Solution 3:** Make sure no other program (like the Arduino IDE's Serial Monitor) is currently connected to the port.
+
+*   **Error: `npm install` fails**
+    *   **Solution:** Ensure you have a stable internet connection and that Node.js and npm are installed correctly. Try deleting the `node_modules` folder and the `package-lock.json` file, then run `npm install` again.
+
+#### Frontend (`sensor-visualizer-app`)
+
+*   **Problem: The visualizer shows "Disconnected" or no data appears.**
+    *   **Solution 1:** Make sure the backend server is running **before** you start the frontend application.
+    *   **Solution 2:** Verify the WebSocket URL in the React code matches the server's address (default is `ws://localhost:8080`).
+    *   **Solution 3:** Open your browser's developer console (F12) and check for any WebSocket connection errors.
+
+*   **Problem: `npm run start` fails or complains about a port being in use.**
+    *   **Solution:** Another application is likely using port 3000. You can either close the other application or change the port for the React app.
 
 ## Usage
 
