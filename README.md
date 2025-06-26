@@ -198,7 +198,7 @@ cd HD16_Analog_Sensor
     ```
 4.  Start the backend server:
     ```bash
-    npm start
+    npm run dev
     ```
 
     *   **Note:** The server will attempt to connect to the ESP32's serial port. You may need to update the port name in the `src/index.ts` file to match your system's configuration. On Linux and macOS, you might need to grant your user serial port access (`sudo usermod -a -G dialout $USER`).
@@ -216,7 +216,7 @@ cd HD16_Analog_Sensor
     ```
 4.  Start the React development server:
     ```bash
-    npm start
+    npm run start
     ```
 
 This will automatically open a new tab in your default web browser at `http://localhost:3000`. The application will connect to the backend WebSocket and begin displaying sensor data.

@@ -1,4 +1,5 @@
 # IDE and OS files
+.windsurf/
 .vscode/
 .idea/
 .DS_Store
