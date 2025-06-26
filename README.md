@@ -74,6 +74,10 @@ The repository is organized into three main components:
 
 ### 1. Hardware Setup
 
+> **💡 Important Note for Best Results:**
+> *   **Optimal Sensing Distance (Hf)**: For the most accurate readings, maintain a constant height of **2.5 mm** between the TCRT5000 sensor and the surface. The optimal sensing range is between **1 mm and 5 mm**.
+> *   **Reliable Connections**: Ensure firm, stable connections between the sensors and the microcontroller. Fragile jumper wires can cause noise and unreliable readings. Soldered connections are recommended for permanent setups.
+
 ```
 +----------------+      +----------------+      +----------------+
 |  TCRT5000 x16  |      |    CD4067      |      |  Micro-       |
@@ -243,7 +247,7 @@ This will automatically open a new tab in your default web browser at `http://lo
 
 ## Usage
 
-1.  Ensure the ESP32 is programmed and connected to your computer.
+1.  Ensure the Microcontroller is programmed and connected to your computer.
 2.  Run the backend server to establish a serial connection and start the WebSocket.
 3.  Run the frontend application to view the data visualization.
 
