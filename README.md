@@ -15,14 +15,34 @@ This project provides a complete system for reading data from a 16-channel analo
 |----------------|---------|----------------|-------|
 | ESP32 | 3.3V | 12-bit | Built-in WiFi/BLE, recommended for wireless projects |
 | ESP8266 | 3.3V | 10-bit | Built-in WiFi, good for basic applications |
-| Arduino Uno | 5V | 10-bit | Classic choice, 5V logic |
-| Arduino Nano | 5V | 10-bit | Compact form factor |
-| Arduino Mega 2560 | 5V | 10-bit | More I/O pins |
+| Arduino Uno | 5V | 10-bit | Classic choice, 5V logic **(Recommended)** |
+| Arduino Nano | 5V | 10-bit | Compact form factor **(Recommended)** |
+| Arduino Mega 2560 | 5V | 10-bit | More I/O pins **(Recommended)** |
 | STM32 (Blue Pill) | 3.3V | 12-bit | High performance, ARM Cortex-M3 |
 | Teensy 4.0/4.1 | 3.3V | 12-bit | High performance, ARM Cortex-M7 |
 | Raspberry Pi Pico | 3.3V | 12-bit | Dual-core ARM Cortex-M0+ |
-| ATmega328P | 5V | 10-bit | Used in Arduino Uno/Nano |
+| ATmega328P | 5V | 10-bit | Used in Arduino Uno/Nano **(Recommended)** |
+| ATMega8/16/32 Series | 5V | 10-bit | Popular 8-bit AVR MCUs **(Recommended)** |
+| ATTiny Series | 3.3V/5V | 10-bit | Compact, low-power AVR MCUs **(Recommended)** |
+| STM8 Series | 3.3V/5V | 10-bit | Cost-effective 8-bit MCUs **(Recommended)** |
 | ESP32-S2/S3 | 3.3V | 12-bit | Improved ESP32 variants |
+
+### ADC Configuration and Best Practices
+
+For the most accurate and stable analog readings, consider the following recommendations:
+
+*   **Voltage Reference (Vref)**:
+    *   **Use a Stable Vref**: The accuracy of your ADC is directly tied to the stability of its voltage reference. Using the microcontroller's internal Vref is often more stable than relying on the main power supply (VCC), which can be noisy.
+    *   **External Vref**: For high-precision applications, consider using a dedicated external voltage reference IC (e.g., TL431, LM4040). This provides the cleanest and most stable reference.
+
+*   **Decoupling Capacitors**:
+    *   **Analog VCC (AVCC)**: If your microcontroller has a separate analog power supply pin (AVCC), place a 100nF (0.1uF) ceramic capacitor as close to the pin as possible, connected to ground. This filters out high-frequency noise.
+    *   **Vref Pin**: If you are using an external Vref or the internal Vref has a dedicated pin, place a similar 100nF capacitor on this pin to ground to ensure a stable reference voltage.
+
+*   **Crystal Oscillators and ADC Sampling**:
+    *   **Internal vs. External Oscillators**: Internal RC oscillators are convenient but can be less accurate and more susceptible to temperature and voltage variations than external crystal oscillators.
+    *   **Impact on ADC Clock**: The ADC peripheral often uses the system clock, divided down, as its sampling clock. A stable system clock from an external crystal results in more consistent and predictable ADC sampling times, reducing jitter and improving accuracy, especially at higher sampling rates.
+    *   **Recommendation**: For applications requiring high precision or consistent timing, **prefer microcontrollers with an external crystal oscillator**. While not strictly necessary for this project, it is a best practice for reliable analog measurements.
 
 ### Connection Guide
 
